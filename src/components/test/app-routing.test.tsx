@@ -29,6 +29,12 @@ describe("App routing", () => {
     await waitFor(() => expect(container.firstChild || document.body.firstChild).not.toBeNull());
   });
 
+  it("renders the discover route", async () => {
+    const { container } = renderAt("/discover");
+
+    await waitFor(() => expect(container.firstChild || document.body.firstChild).not.toBeNull());
+  });
+
   it("renders the not-found route", async () => {
     vi.spyOn(console, "warn").mockImplementation(() => undefined);
 
