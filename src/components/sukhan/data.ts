@@ -381,3 +381,149 @@ export const coupletSearch = (s: Record<string, unknown>): { id?: number } => {
   const id = Number(s["id"]);
   return Number.isFinite(id) && id > 0 ? { id } : {};
 };
+
+export type PoetProfile = {
+  id: string;
+  name: string;
+  urduName: string;
+  era: string;
+  bio: string;
+  themes: string[];
+};
+
+export const poetsData: Record<string, PoetProfile> = {
+  "Mirza Ghalib": {
+    id: "mirza-ghalib",
+    name: "Mirza Ghalib",
+    urduName: "مرزا اسد اللہ خاں غالب",
+    era: "1797–1869 · Mughal Delhi",
+    bio: "Ghalib is the rebellious philosopher of Urdu poetry who questioned everything with a mischievous smirk. He walked the crumbling lanes of Mughal Delhi, turning heartbreak, empty pockets, and existential doubt into sublime art. Rather than wallowing in sadness, he laughed at human weakness and teased destiny itself. His couplets feel startlingly modern because he embraced doubt as the truest form of belief. Reading Ghalib is like sitting with a brilliant, witty friend over tea late into the night.",
+    themes: ["Existentialism", "Irony & Wit", "Human Fragility", "Mysticism", "Mughal Delhi"],
+  },
+  "Faiz Ahmed Faiz": {
+    id: "faiz-ahmed-faiz",
+    name: "Faiz Ahmed Faiz",
+    urduName: "فیض احمد فیض",
+    era: "1911–1984 · Progressive Movement",
+    bio: "Faiz made revolution sound as tender and heartbreaking as a secret confession of love. He stood fearlessly against tyrants and spent years in prison and exile, yet his poetry never turned bitter or harsh. Instead, he blended romantic nostalgia with a deep hunger for justice, human dignity, and freedom. In his verses, the pain of missing someone feels identical to the ache of a broken nation. He taught generations that speaking truth to power is the highest act of romantic devotion.",
+    themes: ["Rebellion & Hope", "Revolution", "Dignity", "Longing & Love", "Exile"],
+  },
+  "Jaun Elia": {
+    id: "jaun-elia",
+    name: "Jaun Elia",
+    urduName: "جون ایلیا",
+    era: "1931–2002 · Modern Karachi",
+    bio: "Jaun Elia is the ultimate patron saint of modern late-night heartache and raw emotional honesty. He shattered the polite manners of classical poetry, speaking with unfiltered anger, self-deprecation, and devastating tenderness. His verses sound like late-night thoughts whispered into the dark when you cannot sleep. He refused to pretend he was happy, calling out the quiet pretenses of society and romance alike. Reading Jaun feels like looking into a mirror that refuses to flatter you.",
+    themes: ["Existential Despair", "Nihilism", "Late-Night Melancholy", "Alienation", "Raw Grief"],
+  },
+  "Parveen Shakir": {
+    id: "parveen-shakir",
+    name: "Parveen Shakir",
+    urduName: "پروین شاکر",
+    era: "1952–1994 · Modern Pakistan",
+    bio: "Parveen Shakir brought the scent of fresh rain and young, honest affection into modern Urdu verse. She was among the very first women to write openly about desire, jealousy, and the vulnerability of falling in love from a woman's own heart. Her words carry the lightness of a blooming flower alongside the sharp sting of being misunderstood. She balanced emotional warmth with a fierce, dignified independence. To read Parveen is to feel a gentle breeze on an overcast afternoon, carrying memories you thought you had forgotten.",
+    themes: ["Feminine Voice", "Longing & Fragrance", "Emotional Independence", "Gentle Melancholy"],
+  },
+  "Allama Iqbal": {
+    id: "allama-iqbal",
+    name: "Allama Iqbal",
+    urduName: "علامہ محمد اقبال",
+    era: "1877–1938 · Lahore & Sialkot",
+    bio: "Iqbal is the visionary poet whose words sound like an urgent thunderclap awakening the sleeping soul. He hated self-pity and urged every human being to discover 'Khudi'—the fearless fire of selfhood and dignity inside. Rather than mourning what is lost, his couplets challenge the stars and push horizons past the sky. He believed our struggles are not punishments, but wings designed to help us fly higher. Reading Iqbal fills your chest with purpose, grit, and the courage to rewrite your own destiny.",
+    themes: ["Khudi (Selfhood)", "Cosmic Destiny", "Spiritual Awakening", "Courage & Motivation"],
+  },
+  "Ahmad Faraz": {
+    id: "ahmad-faraz",
+    name: "Ahmad Faraz",
+    urduName: "احمد فراز",
+    era: "1931–2008 · Modern Pakistan",
+    bio: "Ahmad Faraz is perhaps the most universally beloved romantic voice of modern South Asia. His couplets roll off the tongue with effortless musicality, turning even bitter goodbyes into sweet, memorable melodies. Yet beneath his soft romantic charm was an iron spine that openly defied military dictators and paid the price in exile. He captured the dignity of unrequited love like no other—never pleading, always gracious even in tearful parting. If love had an official voice in Urdu, it would sound like Faraz.",
+    themes: ["Romantic Longing", "Dignified Heartbreak", "Defiance", "Musicality"],
+  },
+  "Nasir Kazmi": {
+    id: "nasir-kazmi",
+    name: "Nasir Kazmi",
+    urduName: "ناصر کاظمی",
+    era: "1925–1972 · Lahore",
+    bio: "Nasir Kazmi is the quiet poet of solitary twilights, foggy mornings, and late-night strolls. Carrying the lingering ache of displacement after Partition, he built entire worlds using simple words like wind, shadows, and courtyards. His verses do not shout; they linger like a cool breeze through an open window at 2 AM. He finds a strange, comforting beauty in being alone with one's thoughts. Reading Nasir is like sitting in an empty room, listening to rain fall softly on the roof.",
+    themes: ["Nocturnal Solitude", "Displacement & Memory", "Quiet Longing", "Urban Melancholy"],
+  },
+  "Mir Taqi Mir": {
+    id: "mir-taqi-mir",
+    name: "Mir Taqi Mir",
+    urduName: "میر تقی میر",
+    era: "1723–1810 · Classical Delhi",
+    bio: "Known as 'Khuda-e-Sukhan' (the God of Poetry), Mir is the supreme craftsman of sorrow and pure, unfiltered feeling. He lived through the tragic burning and looting of Delhi, pouring the ashes of his beloved city and his own bruised heart into verse. His language is astonishingly simple, yet every couplet hits with the force of an unhealed wound. He believed suffering is not a flaw in life, but the secret ink from which genuine beauty is born. Even the proud Ghalib bowed his head in reverence before Mir's genius.",
+    themes: ["Supreme Pathos", "Sublime Simplicity", "Civilisational Ruin", "Unrequited Love"],
+  },
+  "Momin Khan Momin": {
+    id: "momin-khan-momin",
+    name: "Momin Khan Momin",
+    urduName: "مومن خان مومن",
+    era: "1800–1852 · Delhi",
+    bio: "Momin was the master of romantic suspense, private glances, and whispered secrets. A handsome aristocrat, chess master, and astrologer, he wrote ghazals filled with clever double meanings and delicate emotional tension. His verses capture those breathless moments when two people are together in a crowded room and say everything without uttering a word. Even Ghalib famously offered to trade his entire poetic collection for just one of Momin’s couplets. He understood that in love, what is left unsaid is often the most unforgettable.",
+    themes: ["Subtle Romance", "Psychological Intimacy", "Witty Conceits", "Unspoken Affection"],
+  },
+  "Bahadur Shah Zafar": {
+    id: "bahadur-shah-zafar",
+    name: "Bahadur Shah Zafar",
+    urduName: "بہادر شاہ ظفر",
+    era: "1775–1862 · Last Mughal Emperor",
+    bio: "Zafar was the last Mughal Emperor of India, whose poetry became the moving eulogy of a fallen empire. Stripped of his crown and exiled by colonial rulers to a lonely cell in Burma, he poured his grief into verses of haunting beauty. He wrote of dust, fading lights, and the heartbreak of knowing he would never be buried in his homeland. His poems strip away royal illusions to reveal a tender, fragile human soul in surrender to fate. In his sorrow, millions recognized the shared tragedy of a lost golden age.",
+    themes: ["Imperial Elegies", "Helplessness & Dust", "Exile & Longing", "Spiritual Resignation"],
+  },
+  "Khwaja Mir Dard": {
+    id: "khwaja-mir-dard",
+    name: "Khwaja Mir Dard",
+    urduName: "خواجہ میر درد",
+    era: "1721–1785 · Delhi Sufi",
+    bio: "Khwaja Mir Dard is the serene mystic whose poetry feels like a quiet sanctuary in a noisy, turbulent world. While armies fought and empires collapsed around him, he sat peacefully in his Delhi shrine, composing verses of divine longing and inner stillness. He taught that the endless universe cannot contain the Divine, but the humble human heart holds space for it easily. His lines carry a meditative rhythm that slows down your breathing and clears the mind. Reading Dard brings a deep, steady peace to a restless soul.",
+    themes: ["Sufi Mysticism", "Divine Communion", "Inner Sanctuary", "Transcendence"],
+  },
+  "Atish Lakhnavi": {
+    id: "atish-lakhnavi",
+    name: "Atish Lakhnavi",
+    urduName: "خواجہ حیدر علی آتش",
+    era: "1778–1847 · Lucknow School",
+    bio: "Atish brought royal swagger, pride, and dazzling colour to the courts and literary gardens of Lucknow. He walked with a sword at his hip and wrote couplets that practically dance with vibrant rhythm and confident self-respect. His verses celebrate lush roses, restless nightingales, and the intoxicating thrill of facing the beloved eye to eye. He firmly believed that a poet should bow to no king and beg no favors from destiny. His words are an invitation to live boldly, love passionately, and keep your head held high.",
+    themes: ["Lucknow Elegance", "Musical Cadence", "Pride & Chivalry", "Lush Romance"],
+  },
+  "Ibrahim Zauq": {
+    id: "ibrahim-zauq",
+    name: "Ibrahim Zauq",
+    urduName: "شیخ محمد ابراہیم ذوق",
+    era: "1790–1854 · Mughal Delhi",
+    bio: "Zauq was the legendary court poet and teacher to the Mughal Emperor, revered for his flawless command over language and flow. He turned spoken Urdu idioms into polished gems, making philosophical wisdom sound as effortless as everyday speech. His couplets gently remind us of life's passing nature—that we arrive without choosing to, and depart when our time is up. Alongside his philosophical poise was an infectious love for the living pulse of Delhi. His poetry remains a masterclass in balance, elegance, and timeless grace.",
+    themes: ["Idiomatic Mastery", "Courtly Eloquence", "Fate & Mortality", "Philosophical Resignation"],
+  },
+};
+
+export const getPoetProfile = (poetName: string): PoetProfile => {
+  const normalized = poetName.trim().toLowerCase();
+  for (const [key, profile] of Object.entries(poetsData)) {
+    if (key.toLowerCase() === normalized || profile.name.toLowerCase() === normalized) {
+      return profile;
+    }
+  }
+  // Fallback for any unknown or variant name
+  return {
+    id: poetName.toLowerCase().replace(/\s+/g, "-"),
+    name: poetName,
+    urduName: poetName,
+    era: "Urdu Master",
+    bio: `${poetName} is a celebrated voice in Urdu literature whose couplets continue to enchant readers across generations.`,
+    themes: ["Classical Ghazal", "Reflection", "Urdu Poetry"],
+  };
+};
+
+export const getCoupletsByPoet = (poetName: string): Couplet[] => {
+  const normalized = poetName.trim().toLowerCase();
+  return coupletsData.filter((c) => c.poet.trim().toLowerCase() === normalized);
+};
+
+export const getAllPoets = (): (PoetProfile & { coupletCount: number })[] => {
+  return Object.values(poetsData).map((profile) => ({
+    ...profile,
+    coupletCount: getCoupletsByPoet(profile.name).length,
+  }));
+};

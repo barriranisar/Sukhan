@@ -1,9 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, ChevronDown, BadgeCheck, X, BookmarkPlus, BookmarkCheck } from "lucide-react";
+import { toast } from "sonner";
 import { Shell } from "@/components/sukhan/Shell";
 import { getCouplet, coupletSearch } from "@/components/sukhan/data";
 import { getVocab, setVocab as storeVocab, getSavedCouplets, setSavedCouplets, type SavedWord } from "@/components/sukhan/store";
+import { isUserAuthenticated } from "@/components/sukhan/auth";
+import { GuestAuthDialog } from "@/components/sukhan/GuestAuthDialog";
 
 export const Route = createFileRoute("/read")({
   validateSearch: coupletSearch,
@@ -24,11 +27,23 @@ function Read() {
   const [open, setOpen] = useState(true);
   const [vocab, setVocab] = useState<SavedWord[]>([]);
   const [savedC, setSavedC] = useState<number[]>([]);
+  const [showGuestDialog, setShowGuestDialog] = useState(false);
+
   useEffect(() => { setVocab(getVocab()); setSavedC(getSavedCouplets()); }, []);
   const bookmarked = savedC.includes(couplet.id);
   const toggleBookmark = () => {
+    if (!isUserAuthenticated()) {
+      setShowGuestDialog(true);
+      return;
+    }
     const next = bookmarked ? savedC.filter((x) => x !== couplet.id) : [...savedC, couplet.id];
-    setSavedC(next); setSavedCouplets(next);
+    setSavedC(next);
+    setSavedCouplets(next);
+    if (bookmarked) {
+      toast.info("Removed from collection");
+    } else {
+      toast.success("Couplet saved to your collection ✨");
+    }
   };
   const lines = couplet[script];
   const g = sel ? (couplet.words[sel[0]]?.[sel[1]] ?? null) : null;
@@ -36,6 +51,10 @@ function Read() {
   const saved = g ? vocab.some((v) => v.key === key) : false;
   const toggleSave = () => {
     if (!g) return;
+    if (!isUserAuthenticated()) {
+      setShowGuestDialog(true);
+      return;
+    }
     const next = saved ? vocab.filter((v) => v.key !== key) : [...vocab, {
       key, word: g.word, roman: g.roman, meaningUrdu: g.meaningUrdu, meaningEnglish: g.meaningEnglish,
       pronunciation: g.pronunciation, couplet: couplet.roman.join(" / "), poet: couplet.poet, coupletId: couplet.id,
@@ -45,24 +64,34 @@ function Read() {
 
   return (
     <Shell>
-      <div className="flex items-center justify-between gap-2 px-5 pt-8">
-        <Link to="/" aria-label="Back" className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-secondary">
-          <ArrowLeft className="h-5 w-5" />
-        </Link>
-        <div className="inline-flex rounded-full bg-card p-1 text-xs font-semibold mr-auto ml-4">
-          {(["urdu", "roman"] as const).map((s) => (
-            <button
-              key={s}
-              onClick={() => setScript(s)}
-              className={`rounded-full px-3 py-1.5 ${script === s ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}
-            >
-              {s === "urdu" ? "Nastaliq Urdu" : "Roman Urdu"}
-            </button>
-          ))}
+      <div className="max-w-2xl mx-auto w-full">
+        {/* Centered Script Toggle with Left-aligned Back Button */}
+        <div className="relative flex items-center justify-center pt-2 md:pt-4 min-h-[44px]">
+          <Link
+            to="/discover"
+            aria-label="Back"
+            className="absolute left-0 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
+          <div className="inline-flex rounded-full bg-card border border-border p-1 text-xs font-semibold shadow-sm">
+            {(["urdu", "roman"] as const).map((s) => (
+              <button
+                key={s}
+                onClick={() => setScript(s)}
+                className={`rounded-full px-4 py-1.5 transition-colors ${
+                  script === s
+                    ? "bg-primary text-primary-foreground font-semibold shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {s === "urdu" ? "Nastaliq Urdu" : "Roman Urdu"}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="px-6 pt-8">
+        <div className="pt-8">
         <p className="mb-2 text-center text-[11px] text-muted-foreground">Tap any word for its meaning</p>
         <div className={`text-center ${script === "urdu" ? "urdu text-[1.7rem]" : "font-display text-2xl leading-[2.2] italic"}`}>
           {lines.map((line, li) => (
@@ -125,17 +154,19 @@ function Read() {
         </div>
       </div>
 
-      <div className="mx-5 mt-10 rounded-3xl bg-card p-5">
-        <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between">
-          <span className="text-sm font-bold">Simple Meaning <span className="text-muted-foreground">(Tashreeh)</span></span>
-          <ChevronDown className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`} />
-        </button>
-        {open && <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{couplet.tashreeh}</p>}
+        <div className="mt-8 rounded-3xl bg-card border border-border p-5">
+          <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between">
+            <span className="text-sm font-bold">Simple Meaning <span className="text-muted-foreground">(Tashreeh)</span></span>
+            <ChevronDown className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`} />
+          </button>
+          {open && <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{couplet.tashreeh}</p>}
+        </div>
+        <div className="flex gap-3 py-6">
+          <Link to="/player" search={{ id: couplet.id }} className="flex-1 rounded-full bg-amber-grad py-3 text-center text-sm font-bold text-primary-foreground shadow-sm hover:opacity-95 transition-opacity">Listen</Link>
+          <Link to="/studio" search={{ id: couplet.id }} className="flex-1 rounded-full border border-border bg-card py-3 text-center text-sm font-bold hover:bg-secondary transition-colors">Make a card</Link>
+        </div>
       </div>
-      <div className="flex gap-3 px-5 py-6">
-        <Link to="/player" search={{ id: couplet.id }} className="flex-1 rounded-full bg-amber-grad py-3 text-center text-sm font-bold text-primary-foreground">Listen</Link>
-        <Link to="/studio" search={{ id: couplet.id }} className="flex-1 rounded-full border border-border py-3 text-center text-sm font-bold">Make a card</Link>
-      </div>
+      <GuestAuthDialog open={showGuestDialog} onOpenChange={setShowGuestDialog} />
     </Shell>
   );
 }

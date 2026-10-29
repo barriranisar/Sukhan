@@ -10,8 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as LibraryRouteImport } from './routes/library'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as PlayerRouteImport } from './routes/player'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ReadRouteImport } from './routes/read'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as StudioRouteImport } from './routes/studio'
@@ -21,14 +24,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DiscoverRoute = DiscoverRouteImport.update({
+  id: '/discover',
+  path: '/discover',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LibraryRoute = LibraryRouteImport.update({
   id: '/library',
   path: '/library',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlayerRoute = PlayerRouteImport.update({
   id: '/player',
   path: '/player',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReadRoute = ReadRouteImport.update({
@@ -49,16 +67,22 @@ const StudioRoute = StudioRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/discover': typeof DiscoverRoute
   '/library': typeof LibraryRoute
+  '/login': typeof LoginRoute
   '/player': typeof PlayerRoute
+  '/profile': typeof ProfileRoute
   '/read': typeof ReadRoute
   '/settings': typeof SettingsRoute
   '/studio': typeof StudioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/discover': typeof DiscoverRoute
   '/library': typeof LibraryRoute
+  '/login': typeof LoginRoute
   '/player': typeof PlayerRoute
+  '/profile': typeof ProfileRoute
   '/read': typeof ReadRoute
   '/settings': typeof SettingsRoute
   '/studio': typeof StudioRoute
@@ -66,22 +90,46 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/discover': typeof DiscoverRoute
   '/library': typeof LibraryRoute
+  '/login': typeof LoginRoute
   '/player': typeof PlayerRoute
+  '/profile': typeof ProfileRoute
   '/read': typeof ReadRoute
   '/settings': typeof SettingsRoute
   '/studio': typeof StudioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/library' | '/player' | '/read' | '/settings' | '/studio'
+  fullPaths:
+    | '/'
+    | '/discover'
+    | '/library'
+    | '/login'
+    | '/player'
+    | '/profile'
+    | '/read'
+    | '/settings'
+    | '/studio'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/library' | '/player' | '/read' | '/settings' | '/studio'
+  to:
+    | '/'
+    | '/discover'
+    | '/library'
+    | '/login'
+    | '/player'
+    | '/profile'
+    | '/read'
+    | '/settings'
+    | '/studio'
   id:
     | '__root__'
     | '/'
+    | '/discover'
     | '/library'
+    | '/login'
     | '/player'
+    | '/profile'
     | '/read'
     | '/settings'
     | '/studio'
@@ -89,8 +137,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DiscoverRoute: typeof DiscoverRoute
   LibraryRoute: typeof LibraryRoute
+  LoginRoute: typeof LoginRoute
   PlayerRoute: typeof PlayerRoute
+  ProfileRoute: typeof ProfileRoute
   ReadRoute: typeof ReadRoute
   SettingsRoute: typeof SettingsRoute
   StudioRoute: typeof StudioRoute
@@ -105,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/discover': {
+      id: '/discover'
+      path: '/discover'
+      fullPath: '/discover'
+      preLoaderRoute: typeof DiscoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/library': {
       id: '/library'
       path: '/library'
@@ -112,11 +170,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/player': {
       id: '/player'
       path: '/player'
       fullPath: '/player'
       preLoaderRoute: typeof PlayerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/read': {
@@ -145,8 +217,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DiscoverRoute: DiscoverRoute,
   LibraryRoute: LibraryRoute,
+  LoginRoute: LoginRoute,
   PlayerRoute: PlayerRoute,
+  ProfileRoute: ProfileRoute,
   ReadRoute: ReadRoute,
   SettingsRoute: SettingsRoute,
   StudioRoute: StudioRoute,

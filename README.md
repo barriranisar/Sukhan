@@ -1,29 +1,29 @@
-# Welcome to your Lovable project
+# Sukhan 🌙
+**Urdu poetry for the quiet hours.**
 
-This project was built with [Lovable](https://lovable.dev).
+Sukhan is a beautifully designed, aesthetic web application built for discovering, reading, and sharing Urdu poetry based on your mood. It focuses on a clean UI, seamless user experience (HCI), and deep engagement with digital literature.
 
-## Build with Lovable
+## ✨ Features
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+- **Mood-Based Discovery:** Find couplets (shers) that match exactly how you are feeling (e.g., Late-Night Thoughts, Quiet Heartbreak, Existential).
+- **Audio Lounge:** Listen to synced, line-by-line audio recitations of your favorite couplets.
+- **Story Studio:** Export aesthetic, customizable HD images and synced audio videos directly to your device for Instagram Stories or WhatsApp Status.
+- **Interactive Reading:** Tap on any Urdu word to instantly see its English and Roman Urdu meaning, and save it to your personal vocabulary.
+- **Personal Library:** A dedicated space for your bookmarked couplets and saved vocabulary.
+- **Dual Script Support:** Read seamlessly in both Nastaliq (Urdu) and Roman English scripts.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## 🛠️ Tech Stack
+- **Framework:** React.js + Vite
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Routing:** TanStack Router
+- **Icons:** Lucide React
 
-## Development
+## 🚀 How to Run Locally
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+If you want to run this project on your local machine, follow these steps:
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/barriranisar/Sukhan.git](https://github.com/barriranisar/Sukhan.git)
 
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
